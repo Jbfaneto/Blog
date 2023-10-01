@@ -2,6 +2,7 @@ package com.blog.mongo.services;
 
 import com.blog.mongo.domain.User;
 
+import com.blog.mongo.dto.UserDTO;
 import com.blog.mongo.repository.UserRepository;
 import com.blog.mongo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+    }
+
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDTO) {
+        return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
     }
 }
