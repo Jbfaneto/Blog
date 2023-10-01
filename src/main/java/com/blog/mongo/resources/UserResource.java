@@ -41,4 +41,10 @@ public class UserResource {
                 .buildAndExpand(obj.getId()).toUri(); // buildAndExpand() is a method that inserts the id into the URI
         return ResponseEntity.created(uri).build();
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
