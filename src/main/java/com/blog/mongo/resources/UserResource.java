@@ -1,5 +1,6 @@
 package com.blog.mongo.resources;
 
+import com.blog.mongo.domain.Post;
 import com.blog.mongo.domain.User;
 import com.blog.mongo.dto.UserDTO;
 import com.blog.mongo.services.UserService;
@@ -54,5 +55,11 @@ public class UserResource {
         obj.setId(id); // ensures that the object will have the id of the path variable
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+      User obj = service.findById(id);
+      return ResponseEntity.ok().body(obj.getPosts());
     }
 }
